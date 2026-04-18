@@ -1,0 +1,51 @@
+{% extends "main/base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-7">
+            <div class="card shadow-lg border-0 rounded-4 p-4">
+                <h2 class="fw-bold mb-4 text-dark text-center">
+                    {% if plant %} Update {{ plant.name }} {% else %} Add New Plant {% endif %}
+                </h2>
+                
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    
+                    {% for field in form %}
+                        <div class="mb-3 {% if field.name == 'is_edible' %}form-check form-switch{% endif %}">
+                            
+                            {% if field.name == 'is_edible' %}
+                                {{ field }}
+                                <label class="form-check-label fw-semibold ms-1">{{ field.label }}</label>
+                            {% else %}
+                                <label class="form-label fw-semibold">{{ field.label }}</label>
+                                
+                                {% if field.name == 'image' and plant.image %}
+                                    <div class="mb-2">
+                                        <img src="{{ plant.image.url }}" width="100" class="rounded shadow-sm">
+                                    </div>
+                                {% endif %}
+                                
+                                {{ field }}
+                            {% endif %}
+
+                            {% if field.errors %}
+                                <div class="text-danger small mt-1">
+                                    {% for error in field.errors %}
+                                        <i class="bi bi-exclamation-circle"></i> {{ error }}
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+
+                    <button type="submit" class="btn btn-dark w-100 py-3 rounded-pill fw-bold shadow mt-3">
+                        Save Plant
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
