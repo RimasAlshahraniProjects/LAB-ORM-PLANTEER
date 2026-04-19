@@ -60,6 +60,19 @@ h1, h2, h3, h4, .fw-bold {
     color: var(--accent-gold) !important;
 }
 
+.custom-nav-link {
+    font-family: 'Poppins', sans-serif; 
+    
+    font-size: 1rem;
+    letter-spacing: 0.5px; 
+    color: #a0a0a0 !important;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.navbar-nav .nav-item {
+    font-family: 'Poppins', sans-serif;
+}
 .card {
     background-color: var(--secondary-dark) !important;
     border: 1px solid rgba(255, 255, 255, 0.05) !important;
@@ -195,7 +208,7 @@ h1, h2, h3, h4, .fw-bold {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-image: linear-gradient(rgba(3, 23, 17, 0.8), rgba(3, 23, 17, 0.8)), url('/static/images/plant_bg_imge.png');
+    background-image: linear-gradient(rgba(3, 23, 17, 0.3), rgba(3, 23, 17, 0.3)), url('/static/images/plant_bg_imge.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -499,4 +512,110 @@ h1, h2, h3, h4, .fw-bold {
     text-transform: uppercase;
     letter-spacing: 1px;
     opacity: 0.8;
+}
+
+.contact-card {
+    background: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(233, 207, 143, 0.1);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+}
+
+.form-control-custom {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(233, 207, 143, 0.2) !important;
+    border-radius: 12px;
+    padding: 12px 20px;
+    color: white !important;
+    margin-bottom: 15px;
+}
+
+.form-control-custom:focus {
+    border-color: var(--accent-gold) !important;
+    outline: none;
+}
+
+
+.btn-send {
+    background: var(--accent-gold);
+    color: var(--primary-dark);
+    border: none;
+    padding: 15px;
+    border-radius: 50px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.btn-send:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(233, 207, 143, 0.3);
+}
+
+.message-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(233, 207, 143, 0.1);
+    border-radius: var(--radius-md);
+    transition: var(--transition);
+}
+
+.message-card:hover {
+    border-color: var(--accent-gold);
+    transform: translateY(-5px);
+    background: rgba(233, 207, 143, 0.03);
+}
+
+.badge-custom {
+    background: var(--accent-gold);
+    color: var(--primary-dark);
+    padding: 5px 15px;
+    border-radius: 50px;
+    font-weight: bold;
+}
+
+.custom-nav-link {
+    color: #a0a0a0 !important; 
+    font-weight: 500;
+    transition: all 0.3s ease;
+    position: relative;
+    padding: 0.5rem 1rem;
+}
+
+li {
+    list-style: none !important;
+}
+
+.custom-nav-link {
+    color: #a0a0a0 !important; 
+    font-weight: 500;
+    transition: all 0.3s ease;
+    position: relative;
+    padding: 0.5rem 1rem;
+}
+
+.custom-nav-link:hover {
+    color: #E9CF8F !important; 
+    transform: translateY(-2px);
+}
+
+.active-gold {
+    color: #E9CF8F !important;
+    font-weight: 700;
+}
+
+.active-gold::after {
+    content: '';
+    display: block;
+    width: 15px;
+    height: 2px;
+    background: #E9CF8F;
+    margin: 0 auto;
+    border-radius: 10px;
+    margin-top: 2px;
+}
+
+.custom-text {
+    color: #ffffff !important; 
 }

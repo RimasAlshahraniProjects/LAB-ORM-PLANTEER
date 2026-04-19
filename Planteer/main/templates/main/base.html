@@ -34,6 +34,13 @@
         </li>
       </ul>
 
+    <li class="nav-item">
+    <a class="nav-link custom-nav-link {% if request.resolver_match.url_name == 'contact_view' %}active-gold{% endif %}" 
+       href="{% url 'contact:contact_view' %}">
+        <i class="bi bi-envelope-paper me-1"></i> Contact
+    </a>
+</li>
+
       <form class="d-flex" role="search" action="{% url 'plants:search_view' %}" method="GET">
     <input class="form-control me-2 border-0 bg-light shadow-none" 
            type="search" 

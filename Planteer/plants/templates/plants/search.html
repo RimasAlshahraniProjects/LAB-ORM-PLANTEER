@@ -6,12 +6,10 @@
     <div class="text-center mb-5">
         <h2 class="section-title">Search Results</h2>
         
-        {# عرض عدد النتائج باستخدام دالة count #}
         <h5 class="text-muted">
             Found <span class="text-success fw-bold">{{ results|length }}</span> results
         </h5>
 
-        {# عرض العبارة التي بحث عنها المستخدم من الـ GET #}
         {% if request.GET.search %}
             <p class="mt-2">
                 You searched for: <span class="badge bg-dark rounded-pill px-3 py-2">"{{ request.GET.search }}"</span>
