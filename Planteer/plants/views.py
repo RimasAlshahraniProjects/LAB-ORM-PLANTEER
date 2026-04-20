@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect, get_object_or_404
 from django.http import HttpRequest
-from .models import Plant
+from .models import Plant, Review
 from .forms import PlantForm
 # Create your views here.
 
@@ -55,3 +55,17 @@ def search_view(request):
         results = [] 
         
     return render(request, "plants/search.html", {"results": results})
+
+
+def add_review_view(request: HttpRequest, plant_id):
+    plant_object = Plant.objects.get(pk=plant_id)
+
+    if request.method == "POST":
+        new_review = Review(
+            plant=plant_object, 
+            name=request.POST["name"], 
+            comment=request.POST["comment"]
+        )
+        new_review.save()
+
+    return redirect("plants:plant_detail_view", plant_id=plant_id)

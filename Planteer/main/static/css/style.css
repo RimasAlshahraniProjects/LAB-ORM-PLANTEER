@@ -619,3 +619,109 @@ li {
 .custom-text {
     color: #ffffff !important; 
 }
+
+/* --- قسم المراجعات (Reviews Section) --- */
+.reviews-section {
+    padding: 80px 0;
+    border-top: 1px solid rgba(233, 207, 143, 0.1); /* استخدام الـ accent-gold بشفافية عالية */
+}
+
+.reviews-title {
+    color: var(--white);
+    font-size: 1.8rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.review-card {
+    background: var(--secondary-dark);
+    border: 1px solid rgba(233, 207, 143, 0.1); /* لمسة ذهبية بسيطة */
+    border-radius: var(--radius-md);
+    padding: 25px;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.review-card:hover {
+    border-color: var(--accent-gold);
+    transform: translateX(8px);
+}
+
+.review-author {
+    color: var(--accent-gold); /* الكاتب باللون الذهبي لإبرازه */
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.review-date {
+    color: var(--text-muted);
+    font-size: 0.8rem;
+}
+
+.review-text {
+    color: var(--text-main);
+    line-height: 1.8;
+    margin-top: 12px;
+}
+
+/* --- صندوق إضافة مراجعة (Add Review Box) --- */
+.add-review-box {
+    background-color: var(--primary-dark);
+    border: 1px solid var(--secondary-dark);
+    padding: 40px;
+    border-radius: var(--radius-lg);
+    position: sticky;
+    top: 100px;
+    box-shadow: var(--shadow);
+}
+
+.add-review-box h4 {
+    color: var(--white);
+    font-size: 1.4rem;
+    margin-bottom: 30px;
+}
+
+/* تنسيق الحقول بستايل الـ Minimalist */
+.review-input {
+    background: transparent !important;
+    border: none !important;
+    border-bottom: 1px solid var(--text-muted) !important;
+    border-radius: 0 !important;
+    color: var(--text-main) !important;
+    padding: 12px 5px !important;
+    margin-bottom: 25px !important;
+    transition: var(--transition);
+}
+
+.review-input:focus {
+    border-bottom-color: var(--accent-gold) !important;
+    box-shadow: none !important;
+}
+
+.review-input::placeholder {
+    color: var(--text-muted);
+    opacity: 0.5;
+    font-size: 0.8rem;
+}
+
+/* زر الإرسال الذهبي */
+.btn-review-submit {
+    background-color: var(--accent-gold);
+    color: var(--primary-dark);
+    border: 1px solid var(--accent-gold);
+    border-radius: var(--radius-md);
+    padding: 15px;
+    width: 100%;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: var(--transition);
+}
+
+.btn-review-submit:hover {
+    background-color: transparent;
+    color: var(--accent-gold);
+    box-shadow: 0 0 15px rgba(233, 207, 143, 0.3);
+}

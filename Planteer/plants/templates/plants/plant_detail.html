@@ -48,6 +48,40 @@
     </div>
 </div>
 
+
+<section class="reviews-section container">
+    <div class="row">
+        <div class="col-md-7">
+            <h3 class="reviews-title mb-5">Community Insights</h3>
+            {% for review in plant.reviews.all %}
+            <div class="review-card">
+                <div class="review-header">
+                    <span class="review-author">{{ review.name }}</span>
+                    <span class="review-date">{{ review.created_at|date:"d M Y" }}</span>
+                </div>
+                <p class="review-text">{{ review.comment }}</p>
+            </div>
+            {% empty %}
+            <p style="color: var(--text-muted);">No insights shared yet.</p>
+            {% endfor %}
+        </div>
+
+        <div class="col-md-5">
+            <div class="add-review-box">
+                <h4>Leave a Note</h4>
+                <form action="{% url 'plants:add_review_view' plant.id %}" method="POST">
+                    {% csrf_token %}
+                    <input type="text" name="name" class="review-input w-100" placeholder="YOUR NAME" required>
+                    <textarea name="comment" class="review-input w-100" rows="4" placeholder="SHARE YOUR EXPERIENCE" required></textarea>
+                    <button type="submit" class="btn-review-submit">Submit Review</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+        
+
+
 <section class="related-section">
     <div class="container">
         <h3 class="related-title">Related Plants</h3>
