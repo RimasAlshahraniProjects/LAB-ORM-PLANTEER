@@ -620,7 +620,6 @@ li {
     color: #ffffff !important; 
 }
 
-/* --- قسم المراجعات (Reviews Section) --- */
 .reviews-section {
     padding: 80px 0;
     border-top: 1px solid rgba(233, 207, 143, 0.1); /* استخدام الـ accent-gold بشفافية عالية */
@@ -636,7 +635,7 @@ li {
 
 .review-card {
     background: var(--secondary-dark);
-    border: 1px solid rgba(233, 207, 143, 0.1); /* لمسة ذهبية بسيطة */
+    border: 1px solid rgba(233, 207, 143, 0.1); 
     border-radius: var(--radius-md);
     padding: 25px;
     margin-bottom: 20px;
@@ -650,7 +649,7 @@ li {
 }
 
 .review-author {
-    color: var(--accent-gold); /* الكاتب باللون الذهبي لإبرازه */
+    color: var(--accent-gold);
     font-weight: 600;
     font-size: 1.1rem;
 }
@@ -666,7 +665,6 @@ li {
     margin-top: 12px;
 }
 
-/* --- صندوق إضافة مراجعة (Add Review Box) --- */
 .add-review-box {
     background-color: var(--primary-dark);
     border: 1px solid var(--secondary-dark);
@@ -683,7 +681,6 @@ li {
     margin-bottom: 30px;
 }
 
-/* تنسيق الحقول بستايل الـ Minimalist */
 .review-input {
     background: transparent !important;
     border: none !important;
@@ -706,7 +703,6 @@ li {
     font-size: 0.8rem;
 }
 
-/* زر الإرسال الذهبي */
 .btn-review-submit {
     background-color: var(--accent-gold);
     color: var(--primary-dark);
