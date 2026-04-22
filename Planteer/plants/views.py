@@ -1,13 +1,23 @@
 from django.shortcuts import render,redirect, get_object_or_404
 from django.http import HttpRequest
-from .models import Plant, Review
+from .models import Plant, Review, Country
 from .forms import PlantForm
 # Create your views here.
 
-def all_plants_view(request: HttpRequest):
-    plants = Plant.objects.all().order_by('-created_at')
-    return render(request, "plants/all_plants.html", {"plants": plants})
- 
+def all_plants_view(request):
+    all_countries = Country.objects.all()
+    
+    country_id = request.GET.get('country_filter')
+
+    if country_id:
+        plants = Plant.objects.filter(countries__id=country_id)
+    else:
+        plants = Plant.objects.all()
+
+    return render(request, "plants/all_plants.html", {
+        "plants": plants, 
+        "all_countries": all_countries  
+    })
 
 def plant_detail_view(request, plant_id):
     plant = Plant.objects.get(id=plant_id)
@@ -19,8 +29,10 @@ def plant_detail_view(request, plant_id):
         'related_plants': related_plants 
     })
 
+from .models import Plant, Country 
 
 def add_plant_view(request):
+    countries = Country.objects.all()
     if request.method == "POST":
         form = PlantForm(request.POST, request.FILES)
         if form.is_valid():
@@ -28,10 +40,11 @@ def add_plant_view(request):
             return redirect("plants:all_plants_view")
     else:
         form = PlantForm()
-    return render(request, "plants/add_plant.html", {"form": form})
+    return render(request, "plants/add_plant.html", {"form": form, "countries": countries})
 
 def update_plant_view(request, plant_id):
     plant = get_object_or_404(Plant, id=plant_id)
+    countries = Country.objects.all() 
     if request.method == "POST":
         form = PlantForm(request.POST, request.FILES, instance=plant)
         if form.is_valid():
@@ -39,7 +52,7 @@ def update_plant_view(request, plant_id):
             return redirect("plants:plant_detail_view", plant_id=plant.id)
     else:
         form = PlantForm(instance=plant)
-    return render(request, "plants/update_plant.html", {"form": form, "plant": plant})
+    return render(request, "plants/update_plant.html", {"form": form, "plant": plant, "countries": countries})
 
 
 def delete_plant_view(request, plant_id):
@@ -69,3 +82,13 @@ def add_review_view(request: HttpRequest, plant_id):
         new_review.save()
 
     return redirect("plants:plant_detail_view", plant_id=plant_id)
+
+
+def country_plants_view(request, country_id):
+    country = get_object_or_404(Country, id=country_id)
+    plants = Plant.objects.filter(countries=country)
+    
+    return render(request, 'plants/country_plants.html', {
+        'country': country,
+        'plants': plants
+    })

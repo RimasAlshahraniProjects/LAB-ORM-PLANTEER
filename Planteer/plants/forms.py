@@ -14,9 +14,12 @@ class PlantForm(forms.ModelForm):
     class Meta:
         model = Plant
         fields = "__all__"
+       
         widgets = {
             'used_for': forms.Textarea(attrs={'class': 'form-control', 'rows': 2, 'placeholder': 'Usage details...'}),
             'category': forms.Select(attrs={'class': 'form-select'}),
             'is_edible': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
             'image': forms.FileInput(attrs={'class': 'form-control'}),
+            'countries': forms.MultipleHiddenInput(),
+            
         }

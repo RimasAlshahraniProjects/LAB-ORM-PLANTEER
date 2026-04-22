@@ -17,6 +17,20 @@
             <div class="col-md-6">
                 <h1 class="display-4 fw-bold main-text">{{ plant.name }}</h1>
                 <span class="badge-custom mb-3">{{ plant.category }}</span>
+
+                <div class="plant-countries-section mt-4">
+    <h5 class="fw-bold mb-3 accent-gold">Native Regions:</h5>
+    <div class="d-flex flex-wrap gap-2">
+        {% for country in plant.countries.all %}
+            <a href="{% url 'plants:country_plants_view' country.id %}" class="country-link-pill">
+                <img src="{{ country.flag.url }}" width="20" class="me-2 rounded-sm" alt="{{ country.name }}">
+                <span>{{ country.name }}</span>
+            </a>
+        {% empty %}
+            <span class="text-muted small">No native regions recorded.</span>
+        {% endfor %}
+    </div>
+</div>
                 
                 <hr class="footer-divider my-4">
                 

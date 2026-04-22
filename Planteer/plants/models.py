@@ -1,6 +1,17 @@
 from django.db import models
 
 # Create your models here.
+
+class Country(models.Model):
+    name = models.CharField(max_length=100)
+    flag = models.ImageField(upload_to='flags/')
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name_plural = "Countries"
+
 class Plant(models.Model): 
     
     class Category(models.TextChoices):
@@ -22,6 +33,7 @@ class Plant(models.Model):
     
     is_edible = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
+    countries = models.ManyToManyField(Country, related_name='plants')
 
     def __str__(self):
         return self.name
