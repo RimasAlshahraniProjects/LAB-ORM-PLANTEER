@@ -29,9 +29,11 @@
         <li class="nav-item">
           <a class="nav-link" href="{% url 'plants:all_plants_view' %}">Explore</a>
         </li>
+        {% if request.user.is_authenticated and request.user.is_staff %}
         <li class="nav-item">
           <a class="nav-link text-success fw-semibold" href="{% url 'plants:add_plant_view' %}">+ Add Plant</a>
         </li>
+        {% endif %}
       </ul>
 
     <li class="nav-item">
@@ -40,6 +42,33 @@
         <i class="bi bi-envelope-paper me-1"></i> Contact
     </a>
 </li>
+
+<div class="dropdown">
+  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    {% if request.user.is_authenticated %}
+        <i class="bi bi-person-circle"></i> {{ request.user.username }}
+    {% else %}
+        <i class="bi bi-person"></i> Account
+    {% endif %}
+  </a>
+
+  <ul class="dropdown-menu dropdown-menu-end">
+    {% if request.user.is_authenticated %}
+        <li><a class="dropdown-item" href="#"><i class="bi bi-person-badge me-2"></i> Profile</a></li>
+        
+        {% if request.user.is_staff %}
+            <li><a class="dropdown-item" href="{% url 'admin:index' %}"><i class="bi bi-cpu me-2"></i> Admin Panel</a></li>
+        {% endif %}
+        
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item text-danger" href="{% url 'accounts:log_out' %}"><i class="bi bi-power me-2"></i> Logout</a></li>
+    
+    {% else %}
+        <li><a class="dropdown-item" href="{% url 'accounts:sign_in' %}"><i class="bi bi-box-arrow-in-right me-2"></i> Sign In</a></li>
+        <li><a class="dropdown-item" href="{% url 'accounts:sign_up' %}"><i class="bi bi-person-plus me-2"></i> Sign Up</a></li>
+    {% endif %}
+  </ul>
+</div>
 
       <form class="d-flex" role="search" action="{% url 'plants:search_view' %}" method="GET">
     <input class="form-control me-2 border-0 bg-light shadow-none" 
@@ -52,6 +81,19 @@
     </div>
   </div>
 </nav>
+
+{% if messages %}
+    <div class="messages-container mb-4">
+        {% for message in messages %}
+            <div class="alert alert-custom {% if message.tags %}alert-{{ message.tags }}{% endif %} border-0 shadow-sm" role="alert" style="border-radius: var(--radius-md);">
+                <div class="d-flex align-items-center">
+                    <i class="bi bi-info-circle-fill me-2"></i>
+                    <span class="small fw-bold text-uppercase" style="letter-spacing: 1px;">{{ message }}</span>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
 
     <main>
         {% block content %}

@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -40,6 +41,6 @@ class Plant(models.Model):
 
 class Review(models.Model): 
     plant = models.ForeignKey(Plant, on_delete=models.CASCADE, related_name="reviews")
-    name = models.CharField(max_length=255)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     comment = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)

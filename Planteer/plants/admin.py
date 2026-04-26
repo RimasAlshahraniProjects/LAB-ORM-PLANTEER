@@ -11,7 +11,7 @@ class PlantAdmin(admin.ModelAdmin):
     ordering = ('-created_at',)
 
 class ReviewAdmin(admin.ModelAdmin):
-    list_display = ('name', 'plant', 'created_at')
+    list_display = ('user', 'plant', 'created_at')
     
     search_fields = ('name', 'comment')
     

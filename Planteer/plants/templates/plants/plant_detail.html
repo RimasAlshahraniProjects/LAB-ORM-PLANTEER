@@ -48,7 +48,7 @@
                         <span class="text-danger">No, not for consumption <i class="bi bi-x-circle-fill ms-1"></i></span>
                     {% endif %}
                 </div>
-
+                {% if request.user.is_authenticated and request.user.is_staff %}
                 <div class="mt-5 d-flex gap-2">
                     <a href="{% url 'plants:update_plant_view' plant.id %}" class="btn-outline-custom">Edit Plant</a>
                     <a href="{% url 'plants:delete_plant_view' plant.id %}" 
@@ -57,20 +57,19 @@
                        Delete
                     </a>
                 </div>
+                {% endif %}
             </div>
         </div>
     </div>
 </div>
 
-
-<section class="reviews-section container">
-    <div class="row">
+<section class="reviews-section container my-5"> <div class="row">
         <div class="col-md-7">
             <h3 class="reviews-title mb-5">Community Insights</h3>
             {% for review in plant.reviews.all %}
-            <div class="review-card">
+            <div class="review-card mb-4">
                 <div class="review-header">
-                    <span class="review-author">{{ review.name }}</span>
+                    <span class="review-author">{{ review.user.username }}</span>
                     <span class="review-date">{{ review.created_at|date:"d M Y" }}</span>
                 </div>
                 <p class="review-text">{{ review.comment }}</p>
@@ -81,14 +80,24 @@
         </div>
 
         <div class="col-md-5">
-            <div class="add-review-box">
-                <h4>Leave a Note</h4>
-                <form action="{% url 'plants:add_review_view' plant.id %}" method="POST">
-                    {% csrf_token %}
-                    <input type="text" name="name" class="review-input w-100" placeholder="YOUR NAME" required>
-                    <textarea name="comment" class="review-input w-100" rows="4" placeholder="SHARE YOUR EXPERIENCE" required></textarea>
-                    <button type="submit" class="btn-review-submit">Submit Review</button>
-                </form>
+            <div class="add-review-box mx-auto p-4" style="background: var(--secondary-dark); border-radius: var(--radius-lg); border: 1px solid rgba(233, 207, 143, 0.1);">
+                <h4 class="mb-4" style="color: var(--accent-gold);">Leave a Note</h4>
+                
+                {% if request.user.is_authenticated %}
+                    <form action="{% url 'plants:add_review_view' plant.id %}" method="POST">
+                        {% csrf_token %}
+                        <input type="text" name="name" class="review-input w-100 mb-3" value="{{ request.user.username }}" readonly style="background: var(--primary-dark); color: var(--white); border: 1px solid #333; padding: 10px;">
+                        
+                        <textarea name="comment" class="review-input w-100 mb-3" rows="4" placeholder="SHARE YOUR EXPERIENCE" required style="background: var(--primary-dark); color: var(--white); border: 1px solid #333; padding: 10px;"></textarea>
+                        
+                        <button type="submit" class="btn-review-submit w-100 py-2 fw-bold" style="background: var(--accent-gold); color: var(--primary-dark); border: none;">Submit Review</button>
+                    </form>
+                {% else %}
+                    <div class="text-center p-3" style="border: 1px dashed var(--accent-gold); border-radius: var(--radius-md);">
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">Want to share your experience?</p>
+                        <a href="{% url 'accounts:sign_in' %}" class="btn btn-sm fw-bold" style="color: var(--accent-gold); border: 1px solid var(--accent-gold);">SIGN IN TO POST</a>
+                    </div>
+                {% endif %}
             </div>
         </div>
     </div>

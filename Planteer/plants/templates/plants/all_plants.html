@@ -16,10 +16,12 @@
                 {% endfor %}
             </select>
         </form>
-
+        {% if request.user.is_authenticated and request.user.is_staff %}
         <a href="{% url 'plants:add_plant_view' %}" class="btn-luxury-green">
             <i class="bi bi-plus-lg"></i> ADD NEW PLANT
         </a>
+        {% endif %}
+        
     </div>
 
     <div class="row">
